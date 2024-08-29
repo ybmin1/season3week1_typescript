@@ -7,15 +7,21 @@ import Modal from "./components/Modal";
 const formFields = [{ name: "name" }, { name: "country" }, { name: "job" }];
 
 function App() {
+  const [currentField, setCurrentField] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     country: "",
     job: "",
   });
-  const [currentField, setCurrentField] = useState("");
+  const [modalType, setModalType] = useState("");
 
-  const onShowModal = (fieldName) => {
+  const onShowModal = (fieldName, actionType) => {
     setCurrentField(fieldName);
+    if (actionType === "add") {
+      setModalType("add");
+    } else if (actionType === "edit") {
+      setModalType("edit");
+    }
   };
 
   const onSubmit = (value) => {
@@ -28,6 +34,7 @@ function App() {
 
   const closeModal = () => {
     setCurrentField("");
+    setModalType("");
   };
 
   return (
@@ -35,18 +42,20 @@ function App() {
       <div className="w-[500px] border rounded m-4">
         {formFields.map((item, index) => (
           <FormField
-            key={index}
             fieldName={item.name}
-            value={formData[item.name]}
+            key={index}
             onShowModal={onShowModal}
+            value={formData[item.name]}
           />
         ))}
       </div>
       {currentField && (
         <Modal
           closeModal={closeModal}
-          onSubmit={onSubmit}
           fieldName={currentField}
+          modalType={modalType}
+          onSubmit={onSubmit}
+          value={formData[currentField]}
         />
       )}
     </>

@@ -1,10 +1,13 @@
 import { useState } from "react";
 
-const pleaseAddYour = "Please add your";
+const pleaseAddYour = "Please add your ";
+const pleaseEditYour = "Please edit your ";
 const submit = "submit";
 
-function Modal({ closeModal, onSubmit, fieldName }) {
-  const [tempValue, setTempValue] = useState("");
+function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
+  const [tempValue, setTempValue] = useState(
+    modalType === "edit" && value ? value : ""
+  );
 
   const handleSubmit = () => {
     onSubmit(tempValue);
@@ -17,7 +20,8 @@ function Modal({ closeModal, onSubmit, fieldName }) {
         <div className="flex bg-green-600 rounded-t">
           <div className="w-11/12">
             <p className="py-1 text-sm text-center text-white">
-              {pleaseAddYour} {fieldName}
+              {modalType === "add" ? pleaseAddYour : pleaseEditYour}
+              {fieldName}
             </p>
           </div>
           <div className="w-1/12 flex justify-end pr-3">
