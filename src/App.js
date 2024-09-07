@@ -4,13 +4,6 @@ import "./App.css";
 import FormField from "./components/FormField";
 import Modal from "./components/Modal";
 
-/**
- * Task1: Add modals for country and job
- * Task2: Remove previously typed value
- * Task3: Optimise the module by creating child components to prevent repitition
- * Any changes that improve efficiency are welcome!
- */
-
 const formFields = [{ name: "name" }, { name: "country" }, { name: "job" }];
 
 function App() {
