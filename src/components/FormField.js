@@ -1,5 +1,4 @@
-const add = "Add";
-const edit = "Edit";
+const buttons = { add: "Add", edit: "Edit" };
 
 function FormField({ fieldName, onShowModal, value }) {
   return (
@@ -14,13 +13,13 @@ function FormField({ fieldName, onShowModal, value }) {
         onClick={() => onShowModal(fieldName, "add")}
         className="px-3 text-sm text-green-700 border rounded border-solid border-green-600 mr-1"
       >
-        {add}
+        {buttons.add}
       </button>
       <button
         onClick={() => onShowModal(fieldName, "edit")}
         className="px-3 text-sm text-green-700 border rounded border-solid border-green-600"
       >
-        {edit}
+        {buttons.edit}
       </button>
     </div>
   );
