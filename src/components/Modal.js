@@ -1,17 +1,34 @@
 import { useState } from "react";
 
+const emptyError = "Please enter at least one character.";
 const pleaseAddYour = "Please add your ";
 const pleaseEditYour = "Please edit your ";
-const submit = "submit";
+const submit = "Submit";
 
 function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
-  const [tempValue, setTempValue] = useState(
+  const [inputValue, setInputValue] = useState(
     modalType === "edit" && value ? value : ""
   );
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (value.trim()) {
+      setError("");
+    } else {
+      setError(emptyError);
+    }
+  };
 
   const handleSubmit = () => {
-    onSubmit(tempValue);
-    setTempValue("");
+    if (!inputValue.trim()) {
+      setError(emptyError);
+    } else {
+      onSubmit(inputValue);
+      setInputValue("");
+      setError("");
+    }
   };
 
   return (
@@ -33,18 +50,25 @@ function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
             </button>
           </div>
         </div>
-        <div className="flex justify-center py-10">
-          <input
-            value={tempValue}
-            onChange={(e) => setTempValue(e.target.value)}
-            className="mr-4 pb-1 border-solid border-gray-200 border"
-          />
-          <button
-            onClick={handleSubmit}
-            className="px-3 text-sm text-white border rounded border-solid bg-green-600 py-1"
-          >
-            {submit}
-          </button>
+        <div className="flex justify-center">
+          <div className="flex flex-col items-start py-10">
+            <div className="flex">
+              <input
+                value={inputValue}
+                onChange={handleChange}
+                className="mr-4 pb-1 border-solid border-gray-200 border"
+              />
+              <button
+                onClick={handleSubmit}
+                className="px-3 text-sm text-white border rounded border-solid bg-green-600 py-1"
+              >
+                {submit}
+              </button>
+            </div>
+            <div className="h-5 text-red-500 text-sm">
+              {error && <p>{error}</p>}
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-gray-500 fixed inset-0 z-20 bg-opacity-50"></div>
