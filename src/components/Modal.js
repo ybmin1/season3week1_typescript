@@ -8,10 +8,10 @@ const messages = {
 };
 
 function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
+  const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState(
     modalType === "edit" && value ? value : ""
   );
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;

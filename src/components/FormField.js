@@ -1,6 +1,6 @@
-const buttons = { add: "Add", edit: "Edit" };
+const buttons = { add: "Add", edit: "Edit", delete: "Delete" };
 
-function FormField({ fieldName, onShowModal, value }) {
+function FormField({ fieldName, onDelete, onShowModal, value }) {
   return (
     <div className="p-4 flex">
       <div className="w-full">
@@ -17,9 +17,15 @@ function FormField({ fieldName, onShowModal, value }) {
       </button>
       <button
         onClick={() => onShowModal(fieldName, "edit")}
-        className="px-3 text-sm text-green-700 border rounded border-solid border-green-600"
+        className="px-3 text-sm text-green-700 border rounded border-solid border-green-600 mr-1"
       >
         {buttons.edit}
+      </button>
+      <button
+        onClick={() => onDelete(fieldName)}
+        className="px-3 text-sm text-green-700 border rounded border-solid border-green-600"
+      >
+        {buttons.delete}
       </button>
     </div>
   );

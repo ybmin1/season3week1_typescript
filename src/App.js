@@ -15,6 +15,18 @@ function App() {
   });
   const [modalType, setModalType] = useState("");
 
+  const closeModal = () => {
+    setCurrentField("");
+    setModalType("");
+  };
+
+  const onDelete = (fieldName) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: "",
+    }));
+  };
+
   const onShowModal = (fieldName, actionType) => {
     setCurrentField(fieldName);
     if (actionType === "add") {
@@ -32,11 +44,6 @@ function App() {
     setCurrentField("");
   };
 
-  const closeModal = () => {
-    setCurrentField("");
-    setModalType("");
-  };
-
   return (
     <>
       <div className="w-[500px] border rounded m-4">
@@ -44,6 +51,7 @@ function App() {
           <FormField
             fieldName={item.name}
             key={index}
+            onDelete={onDelete}
             onShowModal={onShowModal}
             value={formData[item.name]}
           />
