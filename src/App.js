@@ -23,7 +23,7 @@ function App() {
       ...prevData,
       [currentField]: value,
     }));
-    setCurrentField(null);
+    setCurrentField("");
   };
 
   const closeModal = () => {
@@ -46,9 +46,7 @@ function App() {
         <Modal
           closeModal={closeModal}
           onSubmit={onSubmit}
-          fieldName={
-            formFields.find((field) => field.name === currentField).name
-          }
+          fieldName={currentField}
         />
       )}
     </>
