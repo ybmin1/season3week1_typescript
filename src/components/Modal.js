@@ -4,14 +4,14 @@ const buttons = { cancel: "Cancel", submit: "Submit" };
 const messages = {
   add: "Please add your ",
   edit: "Please edit your ",
-  emptyError: "Please enter at least one character.",
+  emptyField: "Please enter at least one character.",
 };
 
 function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
   const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState(
     modalType === "edit" && value ? value : ""
-  );
+  ); //모달 타입이 add인경우 value가 안뜨게 하기 위함. 더 나은 코드가 있나?
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -19,13 +19,13 @@ function Modal({ closeModal, fieldName, modalType, onSubmit, value }) {
     if (value.trim()) {
       setError("");
     } else {
-      setError(messages.emptyError);
+      setError(messages.emptyField);
     }
   };
 
   const handleSubmit = () => {
     if (!inputValue.trim()) {
-      setError(messages.emptyError);
+      setError(messages.emptyField);
     } else {
       onSubmit(inputValue);
       setInputValue("");

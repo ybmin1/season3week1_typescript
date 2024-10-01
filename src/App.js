@@ -29,11 +29,7 @@ function App() {
 
   const onShowModal = (fieldName, actionType) => {
     setCurrentField(fieldName);
-    if (actionType === "add") {
-      setModalType("add");
-    } else if (actionType === "edit") {
-      setModalType("edit");
-    }
+    setModalType(actionType === "add" ? "add" : "edit");
   };
 
   const onSubmit = (value) => {
@@ -50,7 +46,7 @@ function App() {
         {formFields.map((item, index) => (
           <FormField
             fieldName={item.name}
-            key={index}
+            key={item.name}
             onDelete={onDelete}
             onShowModal={onShowModal}
             value={formData[item.name]}
